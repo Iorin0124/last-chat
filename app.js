@@ -10,6 +10,11 @@ var users = require('./routes/users');
 
 var app = express();
 
+var socketio = require('socket.io');
+const http = require('http');
+const server = http.createServer();
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,6 +29,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+/*新規ユーザー登録ページから　登録されたユーザー情報をサーバに保存する*/
+  var array1 = []; //登録者名配列
+  var array2 = []; //パスワード配列
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

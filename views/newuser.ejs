@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src = "/socket.io/socket.io.js"></script>
+  </head>
+  <body style="font-size:1.2em">
+    <h2><%= title %></h2>
+    <p>チャットを利用する為に<%= title %>を行います</p><br>
+
+    <form>
+      ハンドルネーム <input type="text" id="name" size="40" maxlength="25" style="position:absolute; left:200px;"><br>
+      パスワード <input type="text" id="pass" size="15" maxlength="15" style="position:absolute; left:200px;"><br>
+      <input type="button" id="throw" style="position:absolute; left:440px; width:50px;" value="登録" onclick="Registration()">
+      <br><br><br>
+      <a href="http://localhost:3000/">ホームページへ戻る</a>
+    </form>
+
+
+
+  </body>
+</html>
