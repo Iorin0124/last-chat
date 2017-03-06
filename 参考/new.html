@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ユーザー新規登録</title>
+  <style>
+
+  </style>
+</head>
+<body style="font-size:2em;">
+
+  <h2>新規ユーザー登録をします</h2>
+<form>
+  ハンドルネーム <input type="text" id="name" size="40" maxlength="25"><br><br>
+  パスワード <input type="text" id="pass" size="15" maxlength="15"><br>
+  <input type="button" id="throw" value="登録" onclick="Registration()">
+</form>
+<script>
+ //ユーザー登録まで
+ var array1 = []; //登録者名 サーバー側で作りたい
+ var array2 = []; //パスワード サーバー側で作りたい
+  function Registration(){
+    var name = document.getElementById("name").value;
+    var pass = document.getElementById("pass").value;
+    array1.push(name); //サーバー側で登録
+    array2.push(pass); //サーバー側で登録
+    console.log(array1 , "と" , array2);
+  }
+</script>
+
+
+<br><br>
+  <h2>ログイン</h2>
+<p>チャットルームにログインします</p>
+<form>
+  ハンドルネーム <input type="text" id="name2" size="40" maxlength="25"><br><br>
+  パスワード <input type="text" id="pass2" size="15" maxlength="15"><br>
+  <input type="button" id="in" value="ログイン" onclick="Login()">
+</form>
+<script>
+//ユーザーの登録リストから判別してログイン
+var flag = false; //登録済かの判別用フラグ
+function Login(){
+  var name2 = document.getElementById("name2").value; //サーバーからもらう
+  var pass2 = document.getElementById("pass2").value; //サーバーからもらう
+  for(var i = 0; i<=array1.length; i++){ //登録してある全てから判別
+    if(array1[i] === name2){
+      if(array2[i] === pass2){
+        console.log(array1[i] , "がログインしました"); //ここでログインした人物をサーバに情報送信
+        //全体チャットの方で、サーバからの情報をもとにログインした人物のログインアイコンを緑に変更
+        //更に、個人ページを表示させてそこに移動する→全体チャットへコメント出せるようにするため
+        //+ログアウト時にユーザーを特定させるため
+        var flag = true; //登録済なのでフラグON
+      }else{
+        console.log("パスワードが違います");
+        var flag = true; //登録済なのでフラグON
+      }
+    }
+  }
+    if(flag){ //未登録だった場合
+    }else{
+     console.log("未登録です");
+    }
+}
+
+
+</script>
+
+
+
+
+</body>
+</html>

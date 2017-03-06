@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+  <script src = "/socket.io/socket.io.js"></script>
+<style>
+  #logspace{ height:400px; width:800px; background-color:#ffffe0 }
+</style>
+</head>
+<body>
+  <h1>Chat room</h1>
+<div class = "massage">
+  <p>簡易チャット</p>
+</div>
+<form id="startchat">
+  <input type="text" id="namebox" value="名無しさん"><br>
+  <input type="text" id="chatbox" size="100" value="">
+  <input type="button" id="throw" value="送信" onclick="chatthrow()">
+</form>
+<div id="logspace">
+  <center><h2>チャットログ</h2></center>
+  <textarea id="logarea" rows="20" cols="100" disabled></textarea>
+</div>
+
+<script>
+  var socket = io.connect();
+  socket.on('from_server' , function(chatdata){ //サーバからデータを受け取る
+    console.log("サーバーからもらってきたデータは" + chatdata.name + chatdata.comment);
+    logarea.innerHTML = (chatdata.name + "\t" + chatdata.comment + "\n" + logarea.innerHTML);
+  });
+
+  function chatthrow(){ //送信ボタンを押したとき、ハンドルネームとチャット内容をサーバに送る
+    var h_name = document.getElementById("namebox").value;
+    var comment = document.getElementById("chatbox").value;
+    if(comment === ""){
+      console.log("何か入れてください");
+    }else{
+      socket.emit('message' , { name: h_name , comment: comment });
+    }
+  }
+</script>
+
+</body>
+</html>
